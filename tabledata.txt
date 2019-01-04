@@ -1,0 +1,9 @@
+ CREATE TABLE user_role(user_name VARCHAR2(20) PRIMARY KEY,password VARCHAR2(12),role_code VARCHAR2(10));
+
+ CREATE TABLE account(account_number NUMBER(10) PRIMARY KEY,insured_name VARCHAR2(30),insured_street VARCHAR2(40),insured_city VARCHAR2(15),insured_state VARCHAR2(15),insured_zip NUMBER(6),business_segment VARCHAR2(30),user_name VARCHAR2(20) REFERENCES user_role(user_name));
+
+ CREATE TABLE policy(policy_number NUMBER(10) PRIMARY KEY,policy_premium NUMBER(8),account_number NUMBER(10) REFERENCES account(account_number));
+
+
+CREATE TABLE claim(claim_number NUMBER(10) PRIMARY KEY,claim_reason VARCHAR2(30),accident_location_street VARCHAR2(40),accident_city VARCHAR2(15),accident_state VARCHAR2(15),accident_zip NUMBER(6),claim_type VARCHAR2(30),policy_number NUMBER(10) REFERENCES policy(policy_number));
+ CREATE TABLE policy_details(policy_number NUMBER(10) REFERENCES policy(policy_number),question_id VARCHAR2(15),answer VARCHAR2(30));
